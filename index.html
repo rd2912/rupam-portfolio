@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rupam Dutta | Tech Portfolio</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@300;400;700&family=Space+Grotesk:wght@300;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #00f7ff;
+            --secondary: #ff0266;
+            --bg: #0a192f;
+            --light-bg: #172a45;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Space Grotesk', sans-serif;
+            background-color: var(--bg);
+            color: #ccd6f6;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Animations */
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+            100% { transform: translateY(0px); }
+        }
+
+        @keyframes gradient {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            padding: 4rem 2rem;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, var(--primary), var(--secondary));
+            animation: gradient 15s ease infinite;
+            opacity: 0.1;
+            z-index: -1;
+        }
+
+        .hero h1 {
+            font-family: 'Roboto Mono', monospace;
+            font-size: 4rem;
+            background: linear-gradient(45deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 1rem;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        /* Sections */
+        .section {
+            padding: 4rem 2rem;
+            border-bottom: 1px solid #233554;
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 0.8s ease;
+        }
+
+        .section.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .section-header {
+            font-family: 'Roboto Mono', monospace;
+            color: var(--primary);
+            margin-bottom: 2rem;
+            font-size: 2.5rem;
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-header::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 50%;
+            height: 3px;
+            background: var(--secondary);
+        }
+
+        /* Tech Grid */
+        .tech-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .tech-card {
+            background: var(--light-bg);
+            padding: 2rem;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .tech-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,247,255,0.1);
+        }
+
+        .tech-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, var(--primary), transparent);
+            animation: gradient 4s linear infinite;
+            opacity: 0.1;
+        }
+
+        /* Project Cards */
+        .project-card {
+            background: var(--light-bg);
+            border-radius: 8px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            border: 1px solid #233554;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .project-card:hover {
+            transform: translateX(10px);
+            border-color: var(--primary);
+        }
+
+        /* Timeline */
+        .timeline {
+            border-left: 2px solid var(--primary);
+            padding-left: 2rem;
+            margin-left: 1rem;
+            position: relative;
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 2rem;
+            padding: 1.5rem;
+            background: var(--light-bg);
+            border-radius: 4px;
+            transition: all 0.3s ease;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -2.85rem;
+            top: 1.5rem;
+            width: 20px;
+            height: 20px;
+            background: var(--bg);
+            border: 3px solid var(--primary);
+            border-radius: 50%;
+        }
+
+        /* Certifications Grid */
+        .certs-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .cert-card {
+            background: var(--light-bg);
+            padding: 1.5rem;
+            border-radius: 8px;
+            border: 1px solid #233554;
+        }
+
+        /* Awards Section */
+        .awards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .award-card {
+            background: var(--light-bg);
+            padding: 1.5rem;
+            border-radius: 8px;
+            border: 1px solid #233554;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .tech-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Hero Section -->
+    <section class="hero">
+        <h1>RUPAM DUTTA</h1>
+        <h2>Electronics & Computer Engineer</h2>
+        <div class="social-links">
+            <a href="mailto:duttarupam60@gmail.com" class="social-icon"><i class="fas fa-envelope"></i></a>
+            <a href="https://linkedin.com/in/rupam-dutta-8a6b01260" class="social-icon"><i class="fab fa-linkedin"></i></a>
+            <a href="https://github.com/rd2912" class="social-icon"><i class="fab fa-github"></i></a>
+        </div>
+        <div class="contact-info">
+            <p>+91 6289860381</p>
+        </div>
+        <div class="scroll-indicator">
+            <i class="fas fa-chevron-down"></i>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="section" id="about">
+        <h2 class="section-header"><i class="fas fa-user-astronaut"></i> Professional Summary</h2>
+        <p class="summary">Electronics and Computer Engineer with hands-on experience in IoT, networking security, and microcontroller programming. Skilled in Python, SQL, and Java, with expertise in developing scalable hardware-software solutions. Passionate about automation, smart devices, and data-driven decision-making.</p>
+        
+        <div class="tech-grid">
+            <div class="tech-card">
+                <h3><i class="fas fa-microchip"></i> Core Skills</h3>
+                <p>IoT Development, Hardware-Software Integration, AI/ML Implementation, Embedded Systems</p>
+            </div>
+            <div class="tech-card">
+                <h3><i class="fas fa-code"></i> Technologies</h3>
+                <p>Python, C++, SQL, JavaScript, TensorFlow, Arduino, Node.js, CSS</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Education Section -->
+    <section class="section" id="education">
+        <h2 class="section-header"><i class="fas fa-graduation-cap"></i> Education</h2>
+        <div class="timeline">
+            <div class="timeline-item">
+                <h3>SRM Institute of Science and Technology</h3>
+                <p class="date">2021 - 2025</p>
+                <p>Bachelor of Technology, Electronics and Computer Engineering</p>
+                <p>CGPA: 7.20/10</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Experience Section -->
+    <section class="section" id="experience">
+        <h2 class="section-header"><i class="fas fa-briefcase"></i> Professional Journey</h2>
+        <div class="timeline">
+            <div class="timeline-item">
+                <h3>Data Analyst Intern @ Buffer Tech</h3>
+                <p class="date">Jan 2024 - Jul 2024</p>
+                <ul>
+                    <li>Managed and analyzed large datasets for strategic planning</li>
+                    <li>Developed automated reports using Python and SQL</li>
+                    <li>Provided market trend insights for decision-making</li>
+                </ul>
+            </div>
+            <div class="timeline-item">
+                <h3>Intern @ SRM Technologies</h3>
+                <p class="date">Sep 2024 - Dec 2024</p>
+                <ul>
+                    <li>Worked on BLDC motors for electric vehicles</li>
+                    <li>Developed IoT-based smart solutions for EVs</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section class="section" id="projects">
+        <h2 class="section-header"><i class="fas fa-rocket"></i> Key Innovations</h2>
+        
+        <div class="project-card">
+            <h3>AI-Powered Fall Detection System</h3>
+            <p>Real-time patient monitoring using machine learning and IoT alerts</p>
+            <ul>
+                <li>Integrated ML algorithms for movement analysis</li>
+                <li>Developed IoT-based alert system for caregivers</li>
+                <li>90% accuracy in fall detection</li>
+            </ul>
+        </div>
+
+        <div class="project-card">
+            <h3>Li-Fi Communication System</h3>
+            <p>Light-based data transmission prototype</p>
+            <ul>
+                <li>Arduino-based PWM data encoding</li>
+                <li>Photodiode receiver system</li>
+                <li>Achieved 1Mbps transmission speed</li>
+            </ul>
+        </div>
+
+        <div class="project-card">
+            <h3>Enhanced Waste Management Systems for Smart Cities</h3>
+            <p>Developed a smart waste management system for efficient disposal in smart cities</p>
+            <ul>
+                <li>Utilized IoT-enabled sensors to monitor waste bin levels in real-time</li>
+                <li>Transmitted data to a centralized platform via GSM, Zigbee, or Wi-Fi</li>
+                <li>Optimized garbage collection routes using a cloud-based dashboard or mobile app</li>
+                <li>Reduced fuel consumption and collection time with predictive analytics</li>
+                <li>Integrated smart sensors and energy-efficient components for sustainability</li>
+            </ul>
+        </div>
+    </section>
+
+    <!-- Certifications Section -->
+    <section class="section" id="certifications">
+        <h2 class="section-header"><i class="fas fa-certificate"></i> Credentials</h2>
+        <div class="certs-grid">
+            <div class="cert-card">
+                <h3>Generative AI (Microsoft)</h3>
+                <p>Advanced AI model training techniques</p>
+            </div>
+            <div class="cert-card">
+                <h3>Data Analytics Essentials (Cisco)</h3>
+                <p>Big data processing and visualization</p>
+            </div>
+            <div class="cert-card">
+                <h3>Fundamentals of Information Security (Infosys)</h3>
+                <p>Introduction to cybersecurity principles</p>
+            </div>
+            <div class="cert-card">
+                <h3>Introduction to Artificial Intelligence (Great Learning)</h3>
+                <p>Basics of AI and machine learning</p>
+            </div>
+            <div class="cert-card">
+                <h3>Introduction to Back-End Development (META)</h3>
+                <p>Backend development fundamentals</p>
+            </div>
+            <div class="cert-card">
+                <h3>Introduction to Networking and Storage (IBM)</h3>
+                <p>Networking and storage concepts</p>
+            </div>
+            <div class="cert-card">
+                <h3>Breaking Backend (Geeks for Geeks)</h3>
+                <p>Advanced backend development techniques</p>
+            </div>
+            <div class="cert-card">
+                <h3>Sensors and their Applications in IoT Based Systems (SRMIST)</h3>
+                <p>IoT sensor integration and applications</p>
+            </div>
+            <div class="cert-card">
+                <h3>Big Data Analysis Deep Dive (COURSERA)</h3>
+                <p>Advanced big data analytics</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Awards Section -->
+    <section class="section" id="awards">
+        <h2 class="section-header"><i class="fas fa-trophy"></i> Awards</h2>
+        <div class="awards-grid">
+            <div class="award-card">
+                <h3>Gold Medalist – International Mathematics Olympiad (SOF)</h3>
+                <p>Achieved gold medal in the International Mathematics Olympiad organized by SOF.</p>
+            </div>
+            <div class="award-card">
+                <h3>First Place – Li-Fi Technology Project Competition, SRM University</h3>
+                <p>Secured first place in the Li-Fi Technology Project Competition at SRM University.</p>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        // Intersection Observer for scroll animations
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('.section').forEach((el) => observer.observe(el));
+
+        // Particle Animation
+        const canvas = document.createElement('canvas');
+        const ctx = canvas.getContext('2d');
+        canvas.style.position = 'fixed';
+        canvas.style.top = 0;
+        canvas.style.left = 0;
+        canvas.style.zIndex = -1;
+        document.body.appendChild(canvas);
+
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+        resizeCanvas();
+        window.addEventListener('resize', resizeCanvas);
+
+        class Particle {
+            constructor() {
+                this.reset();
+            }
+
+            reset() {
+                this.x = Math.random() * canvas.width;
+                this.y = Math.random() * canvas.height;
+                this.velocity = Math.random() * 0.5 + 0.5;
+                this.radius = Math.random() * 1.5;
+                this.color = `rgba(0, 247, 255, ${Math.random() * 0.5})`;
+            }
+
+            update() {
+                this.y += this.velocity;
+                if (this.y > canvas.height) this.reset();
+            }
+
+            draw() {
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+                ctx.fillStyle = this.color;
+                ctx.fill();
+            }
+        }
+
+        const particles = Array(100).fill().map(() => new Particle());
+
+        function animate() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            particles.forEach(particle => {
+                particle.update();
+                particle.draw();
+            });
+            requestAnimationFrame(animate);
+        }
+        animate();
+    </script>
+</body>
+</html>
